@@ -1,15 +1,16 @@
-import { Router } from 'express';
+import { Router } from "express";
 import { requireAuth } from "../../middleware/auth";
 import { asyncHandler } from "../../utils/asyncHandler";
 import { clerkClient, getAuth } from "@clerk/express";
 import { AppError } from "../../utils/AppError";
 
-
 export const authRouter = Router();
 
-authRouter.post('/sync', requireAuth,
+authRouter.post(
+  "/sync",
+  requireAuth,
 
-    asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res) => {
     const { userId } = getAuth(req);
 
     if (!userId) {
@@ -38,4 +39,6 @@ authRouter.post('/sync', requireAuth,
         .split(",")
         .map((item) => item.trim().toLowerCase())
         .filter(Boolean),
+    );
+  }),
 );
