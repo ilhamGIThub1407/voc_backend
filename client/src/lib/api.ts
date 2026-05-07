@@ -53,7 +53,7 @@ export async function apiGet<T>(url: string, config?: AxiosRequestConfig) {
 
     return response.data.data;
   } catch (error) {
-    throw new Error(getErrorMsg(error));
+    throw new Error(getErrorMsg(error), { cause: error });
   }
 }
 
@@ -70,7 +70,7 @@ export async function apiPost<TResponse, TBody = unknown>(
 
     return response.data.data;
   } catch (error) {
-    throw new Error(getErrorMsg(error));
+    throw new Error(getErrorMsg(error), { cause: error });
   }
 }
 
@@ -88,6 +88,6 @@ export async function apiPut<TResponse, TBody = unknown>(
 
     return response.data.data;
   } catch (error) {
-    throw new Error(getErrorMsg(error));
+    throw new Error(getErrorMsg(error), { cause: error });
   }
 }
