@@ -39,13 +39,5 @@ export function useBootstrapAuth() {
     }
 
     void run();
-  }, [
-    isLoaded,
-    isSignedIn,
-    clearAuth,
-    setError,
-    setLoading,
-    setUser,
-    getToken,
-  ]);
+  }, [isLoaded, isSignedIn]);
 }

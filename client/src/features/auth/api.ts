@@ -1,4 +1,4 @@
-import { apiPost } from "@/lib/api";
+import { apiGet, apiPost } from "@/lib/api";
 import type { MeResponse, SyncResponse } from "./types";
 
 
@@ -8,5 +8,5 @@ export function syncUser() {
 }
 
 export function getMe() {
-    return apiPost<MeResponse>("/auth/me");
+    return apiGet<MeResponse>("/auth/me");
 }

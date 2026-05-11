@@ -6,12 +6,14 @@ export function ProtectedLayout() {
   const { isLoaded, isSignedIn } = useAuth();
   const { isBootstrapped, status } = useAuthStore();
 
-  if (!isLoaded || (isSignedIn && !isBootstrapped || status === "loading")) return null;
+  // Tunggu Clerk selesai load dan auth sudah di-sync
+  if (!isLoaded || (isSignedIn && (!isBootstrapped || status === "loading"))) {
+    return null;
+  }
 
-  
-
+  // Jika belum sign in, redirect ke sign-in
   if (!isSignedIn) {
-    return <Navigate to="profile" />;
+    return <Navigate to="/sign-in" replace />;
   }
 
   return <Outlet />;

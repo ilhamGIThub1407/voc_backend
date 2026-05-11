@@ -4,24 +4,19 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 export function PublicOnlyLayout() {
   const { isLoaded, isSignedIn } = useAuth();
-  const { isBootstrapped, status } = useAuthStore();
-  const location = useLocation();
+  const { isBootstrapped } = useAuthStore();
 
   if (!isLoaded) return null;
 
-  if (isSignedIn && (isBootstrapped || status === "loading")) {
-    return null;
+  // Jika sudah sign in dan bootstrapped, redirect ke home
+  if (isSignedIn && isBootstrapped) {
+    return <Navigate to="/" replace />;
   }
 
+  // Jika belum sign in, tampilkan outlet (sign-in page)
   if (!isSignedIn) {
-    return (
-      <Navigate
-        to="/sign-in"
-        replace
-        state={{ from: `${location.pathname}${location.search}` }}
-      />
-    );
+    return <Outlet />;
   }
 
-  return <Outlet />;
+  return null;
 }
